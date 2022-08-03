@@ -34,11 +34,22 @@ describe('Requisito 5', () => {
     const pokemon = screen.getAllByTestId(pokemonName);
     expect(pokemon).toHaveLength(1);
   });
-  it('exibe os filtros', () => {
+
+  it('possui os botões de filtro por tipo sem repetição', () => {
     renderWithRouter(<App />);
-    const filters = 7;
-    const filterBtn = screen.getAllByTestId('pokemon-type-button');
-    expect(filterBtn).toHaveLength(filters);
+
+    const filtros = 7;
+    const botoes = screen.getAllByTestId('pokemon-type-button');
+    expect(botoes).toHaveLength(filtros);
+  });
+
+  it('Botão e tipo', () => {
+    renderWithRouter(<App />);
+    const array = ['Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+    array.forEach((elemento) => {
+      const buttonTypeFilter = screen.getByRole('button', { name: elemento });
+      expect(buttonTypeFilter).toBeVisible();
+    });
   });
   it('has the All button', () => {
     renderWithRouter(<App />);
